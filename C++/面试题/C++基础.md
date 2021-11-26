@@ -22,7 +22,7 @@ public:
         x = s.x; 
         cout<<"copy constructor is called"<<endl; 
     } 
-    Myint& operator=(Myint y) { //operator=
+    Myint& operator=(Myint y) { //operator=，只有在 b = a; 时调用，初始化赋值时调用拷贝构造函数。
         x = y.x; 
         cout<<" = "<<endl; 
         return *this; 
@@ -61,8 +61,8 @@ a++:
 copy constructor is called  //调用拷贝构造函数
 copy constructor is called  //关闭编译器优化后显示的，调用拷贝构造函数
 5 
-copy constructor is called  //调用拷贝构造函数
-copy constructor is called  //调用operator=，先有一个参数传递需要拷贝构造函数参与
+copy constructor is called  //调用拷贝构造函数，因为是初始化赋值
+copy constructor is called  //调用operator=，先有一个参数传递需要拷贝构造函数参与，如果参数是引用传递，这句话就不会输出。
  = 
 
 ```
