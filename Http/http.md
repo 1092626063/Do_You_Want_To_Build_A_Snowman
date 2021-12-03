@@ -27,6 +27,7 @@ URL，即 uniform resource locator，统一资源定位器，既可以用来标�
 https://www.cnblogs.com/zhou-test/p/9803478.html这个讲得比较好
 
 ### GET 和 POST 方法都是安全、幂等的吗
+- GET 方法涉及到的参数都在 URL 里面，是可见的，是不安全的，可能会泄漏隐私信息，如密码等。
 
 ### HTTP 请求报文格式
 
