@@ -4,7 +4,7 @@ Record some reading notes and important basics knowledge with my own thoughts.
 
 Hopefully, it would contribute to my autumn recruitment of 2022.
 
-Hi my girl, do you want to build a snowman. 
+
 
 
 
