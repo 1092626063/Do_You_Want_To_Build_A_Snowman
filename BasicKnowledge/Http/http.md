@@ -31,7 +31,7 @@ https://www.cnblogs.com/zhou-test/p/9803478.html这个讲得比较好
 
 ### HTTP 请求报文格式
 
-![Image](/图片/http请求格式.png)
+![Image](/Pictures/http请求格式.png)
 
 ```http
 GET /562f25980001b1b106000338.jpg HTTP/1.1              //请求行
