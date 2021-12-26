@@ -1,5 +1,5 @@
 # Git
-接触 git 也有很多年了，之前在学校里只有自己一个人提交，不会出现什么问题。但是当在工作中与团队成员共同开发时，时常遇到一些问题，也一直靠着 google 蒙混过关，并不清楚他的原理，有时还会由于操作失误浪费很多时间，更别说巧妙得利用他。由此，需要系统学习一下，利用它更清晰得辅助我们的版本管理。
+接触 git 也有很多年了，之前在学校里只有自己一个人提交，不会出现什么问题。但是当在工作中与团队成员共同开发时，时常遇到一些问题，也一直靠着 google 蒙混过关，并不清楚他的原理，有时还会由于操作失误浪费很多时间，更别说巧妙得利用它。由此，需要系统学习一下，利用它更清晰得辅助我们的版本管理。
 
 # SSH 配置
 ssh，全称（Secure Shell），工作在客户端认证过程中。
@@ -26,11 +26,31 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 - git checkout -b 本地分支名x origin/远程分支名x
 1. 自动切换到本地分支x
 2. 会和远程分支建立映射关系。
+(其实上面那个命令没必要用，比较难记忆，可以使用下面的方法)
+- git fetch origin & git checkout 远程分支名x
+1. 首先更新所有分支，这样远程分支会在同步到本地 origin/分支名 中
+2. 直接 checkout 想要关联的分支即可
+
 
 - git fetch origin 远程分支名x:本地分支名x
 1. 不会自动切换到该本地分支x，需要手动checkout。
 2. 不会和远程分支建立映射关系。
 
+## git fetch origin
+将远程仓库中新的提交拉取到本地 origin/分支名 中
+
+## git merge 与 git rebase 区别
+- git merge xxx
+1. 将当前分支与 xxx 分支合并
+2. 若两个分支存在不同的 commit 记录，则会自动创建一个新的 merge commit
+3. 优点：记录了真实的 commit 情况，包括每个分支的详情
+4. 因为每次 merge 会自动生成一个 merge commit，当 commit 比较频繁时，看到的分支会比较杂乱
+
+- git rebase xxx
+1. 将当前分支变基到 xxx 分支
+2. 合并之前的 commit 历史，使之成为线性历史树
+3. 优点：得到更简洁的项目历史，省去了 merge commit
+4. 缺点：如果合并出现代码问题不容易定位，因为历史记录已 re-write
 
 ## 建立与远程分支的映射关系
 - git branch --set-upstream-to origin/远程分支名
@@ -38,8 +58,10 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 
 - 撤销映射关系： git branch --unset-upstream
 
-## git branch -vv
-查看本地分支与远程分支的映射关系。
+## git branch [< options >]
+    -vv  查看本地分支与远程分支的映射关系。
+    -a   list both remote-tracking and local branches
+    -d   delete fully merged branch
 
 ## git commit 规范
 commit message格式: 
