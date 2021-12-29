@@ -1,24 +1,43 @@
 #include <iostream>
-#include <map>
+#include <vector>
 #include <string>
- 
+#include <unordered_map>
+
 using namespace std;
- 
-template<typename T>
-void func(T& param) {
-    cout << "传入的是左值" << endl;
+
+void printTab(int num) {
+    cout<<endl;
+    for (int j = 0; j < num; ++j) {
+        cout<<"    ";
+    }
 }
-template<typename T>
-void func(T&& param) {
-    cout << "传入的是右值" << endl;
-}
-template<typename T>
-void warp(T&& param) {
-    func(param);
-}
-int main() {
-    int num = 2019;
-    warp(num);
-    warp(2019);
+
+int main()
+{
+    unordered_map<char, char> mp = {{'{','}'}, {'[', ']'}, {'(', ')'}};
+    string s;
+    cin>>s;
+    int len = s.length();
+    int num = 0;
+    for (int i = 0; i < len; ++i) {
+        cout<<s[i];
+        if (s[i] == '{' || s[i] == '[' || s[i] == '(') {
+            num++;
+            if (mp[s[i]] == s[i+1]) {
+                continue;
+            }
+            printTab(num);
+        }else if (s[i] == '}' || s[i] == ']' || s[i] == ')') {
+            num--;
+        }
+
+        if (s[i] == ',') {
+            if (s[i+1] == '}' || s[i+1] == ']' || s[i+1] == ')')
+                printTab(num-1);
+            else
+                printTab(num);
+        }
+    }
+    //getchar();
     return 0;
 }
