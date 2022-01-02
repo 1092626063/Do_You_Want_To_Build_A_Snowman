@@ -19,6 +19,18 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 - --hard、--soft、--mixed 的区别参照网上。
 - 似乎这种方式只有对本地有效果，如果已经 push 到远程的 commit 记录似乎不会更改。//TODO 待验证
 
+## git stash
+- git stash
+保存当前所有未提交的修改（包括暂存的和非暂存的），保存至栈中
+- git stash save "message..."
+这是 git stash 的完整版
+- git stash list
+查看当前保存在栈中的进度列表
+- git stash pop
+恢复最新保存的工作进度，并将恢复的工作进度从栈中清除
+- git stash clear
+清除栈中所有工作进度
+
 ## 创建本地新分支
 - get checkout -b dev 创建本地 dev 新分支并自动切换到新分支。
 
