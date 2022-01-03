@@ -24,6 +24,8 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 保存当前所有未提交的修改（包括暂存的和非暂存的），保存至栈中
 - git stash save "message..."
 这是 git stash 的完整版
+- git stash push -m 'machine learning' DeepLearning/ -u
+有时候修改了好几个文件，希望部分文件得到暂存，可以使用该命令，其中 -u 是把新创建的文件一并放入暂存区。
 - git stash list
 查看当前保存在栈中的进度列表
 - git stash pop
