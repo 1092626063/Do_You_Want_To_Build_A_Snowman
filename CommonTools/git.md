@@ -33,6 +33,10 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 - git stash clear
 清除栈中所有工作进度
 
+## git cherry-pick
+- git cherry-pick commit-id
+将其他分支上的某一个 commit 合入当前分支，而不是将其他分支上的所有历史 commit 记录合并过来。
+
 ## 创建本地新分支
 - get checkout -b dev 创建本地 dev 新分支并自动切换到新分支。
 
