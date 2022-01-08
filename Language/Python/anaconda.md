@@ -34,6 +34,9 @@ conda uninstall package_name(包名)
 ## conda 安装 pytorch 踩坑
 根据官网 https://pytorch.org/ 安装命令极有可能失败，主要原因是网络不稳定，因此我们需要换源，参考 https://blog.csdn.net/han_hhh/article/details/116001650 该文列举了多种方法。
 
-## vscode PowerShell 使用 conda
+## vscode PowerShell 无法激活 conda 环境
 1. conda命令未找到，是没有设置环境变量所致。
-2. conda activate [CommandNotFoundError], 参考了博客https://www.codenong.com/cs108900830/ 但还未完全解决，每次重启都需要配置。
+2. conda activate [CommandNotFoundError], 
+- 原因是 powershell 的执行策略默认是 Restricted：不加载配置文件或运行脚本。这是出于安全的考虑。
+- 所以我们只需要把执行策略改为 RemoteSigned 即可，命令为 Set-ExecutionPolicy RemoteSigned
+- 参考了博客 https://blog.csdn.net/cskywit/article/details/99202520 目前不清楚这个设置是否有时间期限。
