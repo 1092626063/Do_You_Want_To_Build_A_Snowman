@@ -44,6 +44,7 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 - git checkout -b 本地分支名x origin/远程分支名x
 1. 自动切换到本地分支x
 2. 会和远程分支建立映射关系。
+
 (其实上面那个命令没必要用，比较难记忆，可以使用下面的方法)
 - git fetch origin & git checkout 远程分支名x
 1. 首先更新所有分支，这样远程分支会在同步到本地 origin/分支名 中
