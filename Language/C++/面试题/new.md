@@ -24,6 +24,7 @@ X *p = new X; // new操作符，会调用 operator new 分配空间，然后调�
 ```
 
 ## 为什么要有 placement new
+是operator new重载的一个版本,不能继续重载了。
 使用new操作符分配内存需要在堆中查找足够大的剩余空间，显然这个操作速度是很慢的，而且有可能出现无法分配内存的异常（空间不够）。
 
 placement new主要适用于：
