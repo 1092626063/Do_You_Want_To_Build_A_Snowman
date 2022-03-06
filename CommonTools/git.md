@@ -58,6 +58,13 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 ## git fetch origin
 将远程仓库中新的提交拉取到本地 origin/分支名 中
 
+## git rebase冲突
+git rebase --abort 会放弃合并，回到rebase操作之前的状态，之前的提交的不会丢弃；
+
+git rebase --skip 则会将引起冲突的commits丢弃掉（慎用！！）；
+
+git rebase --continue 合并冲突，结合"git add 文件"命令一起用与修复冲突，提示开发者，一步一步地有没有解决冲突。（fix conflicts and then run "git rebase --continue"）
+
 ## git merge 与 git rebase 区别
 - git merge xxx
 1. 将当前分支与 xxx 分支合并
