@@ -14,6 +14,7 @@ http://www.cnblogs.com/flyoung2008/articles/2136485.html
 priority_queue调用 STL里面的 make_heap(), pop_heap(), push_heap() 算法实现，也算是堆的另外一种形式。
 先写一个用 STL 里面堆算法实现的与真正的STL里面的 priority_queue用法相似的priority_queue， 以加深对 priority_queue 的理解
 
+```c++
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -57,6 +58,7 @@ int main()
     return 0;
  
 }
+```
  
 STL里面的 priority_queue 写法与此相似，只是增加了模板及相关的迭代器什么的。 
 
