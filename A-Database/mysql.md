@@ -151,7 +151,7 @@ B树、B+树的建树过程图：https://blog.csdn.net/a2311minghan/article/deta
 //TODO B+树与红黑树的比较
 
 ### 聚簇索引和非聚簇索引
-![Image](/Pictures/聚簇索引和非聚簇索引.jpg)
+![Image](../Pictures/聚簇索引和非聚簇索引.jpg)
 
 InnoDB：
 - 在同一个结构中保存了B-Tree索引和数据行，数据行存放于叶子结点。
