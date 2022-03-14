@@ -234,7 +234,7 @@ MyISAM：
 释放：当事务提交之后，undo log 并不会立即删除，而是放入待清理链表中，确保事务 undo 段之前版本信息没有被使用后才清理。
 实现：与 redo log 类似。
 
-![Image](/Pictures/事务日志.jpg)
+![Image](../Pictures/事务日志.jpg)
 
 ### 二进制日志 binlog
 由来：MySQL 为了兼容其他非事务引擎的复制，在 server 层引入了 binlog。

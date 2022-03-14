@@ -2,7 +2,7 @@
 RPC（Remote Procedure Call）远程过程调用，即允许程序调用另一个地址空间，区别于本地调用。它隐藏了底层网络技术，使分布式环境下编程变得简单，无需关系底层网络实现细节&协议仅关注业务逻辑实现即可，比如Java的Dubbo、谷歌的grpc等。
 # 原理
 ## 远程调用过程
-![Image](/Pictures/rpc.png)
+![Image](../Pictures/rpc.png)
 
 1. Service A的应用层代码中，调用了Calculator的一个实现类的add方法，希望执行一个加法运算；
 2. 这个Calculator实现类，内部并不是直接实现计算器的加减乘除逻辑，而是通过远程调用Service B的RPC接口，来获取运算结果，因此称之为Stub；
