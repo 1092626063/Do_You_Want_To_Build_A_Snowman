@@ -5,39 +5,59 @@
 
 using namespace std;
 
-void printTab(int num) {
-    cout<<endl;
-    for (int j = 0; j < num; ++j) {
-        cout<<"    ";
+//字符串，文章，string，压缩，还原
+
+unordered_map<string, int> mp1;
+unordered_map<int, string> mp2;
+vector<int> enco;
+vector<string> deco;
+vector<string> art;
+
+void encode(vector<string> v) {
+    int n = v.size();
+    int cnt = 1;
+    for (int i = 0; i < n; ++i) {
+        string word = v[i];
+        if (!mp1.count(word)) {
+            mp1[word] = cnt;
+            mp2[cnt] = word;
+            cnt++;
+        }
+
+        enco.push_back(mp1[word]);
+    }
+}
+
+void decode(vector<int> v) {
+    int n = v.size();
+    for (int i = 0; i < n; ++i) {
+        string word = mp2[v[i]];
+        deco.push_back(word);
+    }
+}
+
+void printEncode(vector<int> v) {
+    int n = v.size();
+    for (int i = 0; i < n; ++i) {
+        cout<<v[i]<<" ";
     }
 }
 
 int main()
 {
-    unordered_map<char, char> mp = {{'{','}'}, {'[', ']'}, {'(', ')'}};
     string s;
-    cin>>s;
-    int len = s.length();
-    int num = 0;
-    for (int i = 0; i < len; ++i) {
-        cout<<s[i];
-        if (s[i] == '{' || s[i] == '[' || s[i] == '(') {
-            num++;
-            if (mp[s[i]] == s[i+1]) {
-                continue;
-            }
-            printTab(num);
-        }else if (s[i] == '}' || s[i] == ']' || s[i] == ')') {
-            num--;
+    while(cin>>s) {
+        if (s == "###") {
+            break;
         }
-
-        if (s[i] == ',') {
-            if (s[i+1] == '}' || s[i+1] == ']' || s[i+1] == ')')
-                printTab(num-1);
-            else
-                printTab(num);
-        }
+        art.push_back(s);
     }
-    //getchar();
+    encode(art);
+    printEncode(enco);
     return 0;
 }
+
+/*
+my name is my name
+1   2   3  4
+*/
