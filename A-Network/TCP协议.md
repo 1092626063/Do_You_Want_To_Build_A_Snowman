@@ -64,3 +64,42 @@ SYN洪泛攻击：就是 Client 在短时间内伪造大量不存在的 IP 地�
 7. **ARQ 协议：** 也是为了实现可靠传输的，它的基本原理就是每发完一个分组就停止发送，等待对方确认。在收到确认后再发下一个分组。
 8. **超时重传：** 当 TCP 发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。
 
+## 拥塞控制
+
+### 慢开始和拥塞避免
+
+![img](../Pictures/Network/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MzY4MDk1,size_16,color_FFFFFF,t_70.png)
+
+### 快重传和快恢复
+
+![img](../Pictures/Network/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MzY4MDk1,size_16,color_FFFFFF,t_70-16474093182352.png)
+
+如果收到一个不按顺序的数据段，它会立即给发送方发送一个重复确认（冗余ACK），如果发送发连续收到三个重复确认，它会假定确认件指出的数据段丢失了，并重传一份。
+
+当有单独的数据包丢失时，快速重传和恢复（FRR）能最有效地工作。当有多个数据信息包在某一段很短的时间内丢失时，它则不能很有效地工作。
+
+
+
+## 浏览器访问url的过程
+
+- 浏览器查找域名的 IP 地址。
+  查找过程：浏览器缓存 > 本地DNS服务器 >  DNS根服务器 > .com服务器等
+- 浏览器向 web 服务器发送一个 HTTP 请求。
+  - 如果使用了 TCP 协议，就会先进行 TCP 三次握手建立连接。
+  - 如果使用了 https 协议，就需要进行加密传输。
+- 服务器处理请求，返回结果。
+
+### 用到的协议
+
+- DNS：获取 IP 地址
+- TCP：与服务器建立连接
+- IP：发送数据在网络层使用 IP 协议
+- ARP：IP 地址转化为 MAC 地址
+- HTTP：使用 http 协议访问网页
+- SSL：使用 SSL 协议对数据进行加密
+
+
+
+## DNS 解析域名过程
+
+![img](../Pictures/Network/v2-367da995706289a83af5c0372d55f43e_720w.jpg)
