@@ -33,7 +33,7 @@ SYN洪泛攻击：就是 Client 在短时间内伪造大量不存在的 IP 地�
 
 ## 四次挥手
 
-![img](../Pictures/Network/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MzY4MDk1,size_16,color_FFFFFF,t_70.png)
+![img](../Pictures/Network/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MzY4MDk1,size_16,color_FFFFFF,t_70-16475777710315.png)
 
 - 客户端-发送一个 FIN，用来关闭客户端到服务器的数据传送
 - 服务器-收到这个 FIN，它发回一 个 ACK，确认序号为收到的序号加 1 。和 SYN 一样，一个 FIN 将占用一个序号
