@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -6,158 +7,109 @@
 using namespace std;
 
 struct node {
-    char rawc;//原始棋子
-    char nowc;//现在棋子
-    int group;// 0, 1, 2
-    node(){}
-    node(char cc, int gg) : rawc(cc), nowc(cc), group(gg) {}
-}P[3][3];
+    int l, r;
+    node() {}
+    node(int ll, int rr) : l(ll), r(rr) {}
+};
 
-bool vis[3][3];//表示第i个group的数字是否使用过
-int ans = 0;//答案数量
-
-void print() {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            cout<<P[i][j].nowc;
-        }
-        cout<<endl;
+bool operator < (node a, node b) {
+    if (a.l == b.l) {
+        return a.r > b.r;
     }
-}
-
-bool check() {
-    // just check row and clo for each 0,1,2
-    vector<int> num(4, 0);
-    for (int i = 0; i < 3; ++i) {
-        fill(num.begin(), num.end(), 0);
-        for (int j = 0; j < 3; ++j) {
-            int x = P[i][j].rawc-'0';
-            if (num[x] == 1) {
-                return false;
-            }
-            num[x] = 1;
-        }
-    }
-
-    for (int i = 0; i < 3; ++i) {
-        fill(num.begin(), num.end(), 0);
-        for (int j = 0; j < 3; ++j) {
-            int x = P[j][i].rawc-'0';
-            if (num[x] == 1) {
-                return false;
-            }
-            num[x] = 1;
-        }
-    }
-    
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            P[i][j].nowc = P[i][j].rawc;
-        }
-    }
-    return true;
-}
-
-bool checkGroup(int g, int i) {
-    return vis[g][i];
-}
-
-void setGroup(int g, int i, int flag) {
-    vis[g][i] = flag;
-}
-
-void dfs(int idx) {
-    int x = idx / 3;
-    int y = idx % 3;
-    if (idx == 10) {
-        if (check())
-            ans++;
-        return ;
-    }
-
-    if (P[x][y].rawc != '*') {        
-        dfs(idx+1);
-        return ;
-    }
-
-    for (int i = 1; i <= 3; ++i) {
-        if (!checkGroup(P[x][y].group, i-1)) {
-            setGroup(P[x][y].group, i-1, true);
-            P[x][y].rawc = '0'+i;
-            dfs(idx+1);
-            P[x][y].rawc = '*';
-            setGroup(P[x][y].group, i-1, false);
-        }
-    }
-    return ;
+    return a.l < b.l;
 }
 
 int main()
 {
-    cout<<1111<<endl;
-    int T;
-    cin>>T;
-    string s;
-    int x, y;
-    while (T--) {
-        ans = 0;
-        for (int i = 0; i < 3; ++i) {
-            cin>>s;
-            for (int j = 0; j < 3; ++j) {
-                P[i][j] = node(s[j], -1);
-                vis[i][j] = false;
-            }
+    int n, m1, m2;
+    cin>>n>>m1>>m2;
+    vector<int> al(m1, 0);
+    vector<int> ar(m1, 0);
+    vector<node> A(m1);
+    for (int i = 0; i < m1; ++i) {
+        cin>>al[i];
+    }
+    for (int i = 0; i < m1; ++i) {
+        cin>>ar[i];
+        A[i].l = al[i];
+        A[i].r = ar[i];
+    }
+    sort(A.begin(), A.end());
+
+    vector<int> bl(m2, 0);
+    vector<int> br(m2, 0);
+    vector<node> B(m2);
+    for (int i = 0; i < m2; ++i) {
+        cin>>bl[i];
+    }
+    for (int i = 0; i < m2; ++i) {
+        cin>>br[i];
+        B[i].l = bl[i];
+        B[i].r = br[i];
+    }
+    sort(B.begin(), B.end());
+
+    vector<node> S(m1+m2);
+    int p = -1;
+
+    //merge A, B
+    for (int i = 0; i < m1; ++i) {
+        if (i == 0) {
+            p++;
+            S[p].l = A[i].l;
+            S[p].r = A[i].r;
+            continue;
         }
-        for (int i = 1; i <= 3; ++i) {
-            for (int k = 0; k < 3; ++k) {
-                cin>>x>>y;
-                P[x][y].group = i;
-            }
-        }
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                if (P[i][j].rawc != '*') {
-                    setGroup(P[i][j].group, (P[i][j].rawc - '0')-1, true);
-                }
-            }
-        } 
-        dfs(0);
-        if (ans == 1) {
-            cout<<"Unique"<<endl;
-            print();
-        } else if (ans > 1) {
-            cout<<"Multiple"<<endl;
+        if (A[i].l == A[i-1].l) continue;
+        if (A[i].l <= S[p].r) {
+            S[p].r = max(A[i].r, S[p].r);
         } else {
-            cout<<"No"<<endl;
+            p++;
+            S[p].l = A[i].l;
+            S[p].r = A[i].r;
         }
     }
+    for (int i = 0; i < m2; ++i) {
+        if (i == 0) {
+            p++;
+            S[p] = B[i];
+            continue;
+        }
+        if (B[i].l == B[i-1].l) continue;
+        if (B[i].l <= S[p].r) {
+            S[p].r = max(S[p].r, B[i].r);
+        } else {
+            p++;
+            S[p] = B[i];
+        }
+    }
+
+    sort(S.begin(), S.begin()+p+1);
+    int ans = 0;
+    int l = S[0].l;
+    int r = S[0].r;
+    for (int i = 1; i <= p; ++i) {
+        if (S[i].l == l) {
+            ans += (S[i].r-S[i].l+1);
+            continue;
+        }
+        if (S[i].l <= r) {
+            if (S[i].r <= r) {
+                ans += (S[i].r-S[i].l+1);
+            } else {
+                ans += (r-S[i].l+1);
+                l = S[i].l;
+                r = S[i].r;
+            }
+        } else {
+            l = S[i].l;
+            r = S[i].r;
+        }
+    }
+    cout<<ans<<endl;
     return 0;
 }
 
 /*
-4
-*2*
-1*2
-***
-0 0 0 1 1 0
-0 2 1 1 1 2
-2 0 2 1 2 2
-**3
-***
-***
-0 0 1 0 1 1
-0 1 0 2 1 2
-2 0 2 1 2 2
-**3
-1**
-**2
-0 0 1 0 1 1
-0 1 0 2 1 2
-2 0 2 1 2 2
-3*3
-1**
-**2
-0 0 1 0 1 1
-0 1 0 2 1 2
-2 0 2 1 2 2
+
 */
