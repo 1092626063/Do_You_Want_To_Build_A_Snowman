@@ -331,7 +331,8 @@ MySQL 为了兼容其他非事务引擎的复制，在 server 层引入了 binlo
 ## MySQL 优化相关
 
 ### MySQL 如何优化 DISTINCT
-//TODO MySQL 如何优化 DISTINCT
+1. 如果没有索引，全表扫描，必然慢。
+2. 存在索引，数据是排好顺序的，分析sql可以看到 using index for group-by
 
 ### SQL 注入漏洞产生的原因？如何防止？
 SQL 注入产生的原因：
