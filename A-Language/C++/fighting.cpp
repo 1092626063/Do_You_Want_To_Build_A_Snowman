@@ -1,30 +1,24 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <string>
+#include <cstring>
 #include <unordered_map>
 
 using namespace std;
+vector<int> a;
 
-struct node {
-    int l, r;
-    node() {}
-    node(int ll, int rr) : l(ll), r(rr) {}
-};
+vector<int> getTime(string s, int maxT) {
+    int n = s.size();
+    vector<int> t;
+    if (s[0] == '*') {
 
-bool operator < (node a, node b) {
-    if (a.l == b.l) {
-        return a.r > b.r;
+    } else {
+        t.push_back(getNumber(s));
+                
     }
-    return a.l < b.l;
 }
 
-int main()
-{
+int main() {
     
     return 0;
 }
-
-/*
-
-*/

@@ -175,6 +175,10 @@ func2(a);
 void func1(int *p);
 void func2(int &p);
 
+## Inline函数
+
+函数调用需要时间和空间开销，inline 是在编译期把函数展开，省去了调用这一过程，节省时空开销。
+
 ****
 
 ## 虚函数
