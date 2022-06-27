@@ -17,11 +17,7 @@ ssh，全称（Secure Shell），工作在客户端认证过程中。
 - 用于合并 commit 结点（开发新功能时，可能频繁得 commit）。
 - 其中 “HEAD^” 可以替换为任意版本。
 - --hard、--soft、--mixed 的区别参照网上。
-- 这种方式只有对本地有效果；如果已经 push 到远程的 commit 记录不能更改了，也不建议使用 reset 更改已经 push 到远程的记录。
-
-## git revert
-- 撤销某次操作，此次操作之前和之后的commit和history都会保留，并且把这次撤销作为一次最新的提交。
-- 推荐使用 revert 代替 reset。
+- 似乎这种方式只有对本地有效果，如果已经 push 到远程的 commit 记录似乎不会更改。//TODO 待验证
 
 ## git stash
 - git stash
