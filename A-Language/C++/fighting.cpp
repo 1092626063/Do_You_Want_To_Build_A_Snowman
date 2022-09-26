@@ -7,37 +7,50 @@
 #include <queue>
 
 using namespace std;
-int dopse[50];
+
 
 int main() {
-    int n, m, k, a;
-    cin>>m>>n>>k;
-    for (int i = 0; i < k; ++i) {
-        cin>>a;
-        dopse[a] = 1;
-    }
+    string s = "-7 + 3 1 - 2";
 
-    //dp[i][j]表示到i这个位置第j条命时能走的方法数
-    vector<vector<int>> dp(n+2, vector<int>(m+1, 0));
-    dp[0][0] = 1;
+    int n = s.length();
+    vector<int> a;
+    vector<int> op;
 
-    for (int i = 1; i <= n+1; ++i) {
-        for (int j = 0; j < m; ++j) {
-            for (int t = 1; t <= 3; ++t) {
-                if (i - t >= 0) {
-                    if (dopse[i] && j > 0) {//空木板，掉一条命
-                        dp[i][j] += dp[i-t][j-1];
-                    } else if (!dopse[i]) {//非空，直接走
-                        dp[i][j] += dp[i-t][j];
-                    }
-                }
+    int t = 0;
+    for (int i = 0; i < n; ++i) {
+        if (s[i] == '+' || s[i] == '-') {
+            if (s[i] == '+') {
+                op.push_back(1);
+            } else {
+                op.push_back(0);
             }
+            a.push_back(t);
+            t = 0;
+        } else if (s[i] == ' ') {
+            continue;
+        } else {
+            t = t*10 + s[i]-'0';
         }
     }
+    if (t) {
+        a.push_back(t);
+    }
 
-    int ans = 0;
-    for (int i = 0; i < m; ++i) {
-        ans += dp[n+1][i];
+    int pos = 0;//op size
+    n = a.size();
+    int ans = a[0];//32 bit
+    if (a.size() == op.size() && op[pos] == 0) {
+        ans = -ans;
+        pos++;
+    }
+
+    for (int i = 1; i < n; ++i) {
+        if (op[pos] == 1) {
+            ans += a[i];
+        } else {
+            ans -= a[i];
+        }
+        pos++;
     }
 
     cout<<ans<<endl;
